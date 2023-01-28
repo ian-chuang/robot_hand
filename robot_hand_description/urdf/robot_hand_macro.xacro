@@ -1,0 +1,436 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find robot_hand_description)/urdf/robot_hand_transmissions.xacro" />
+  <xacro:include filename="$(find robot_hand_description)/urdf/robot_hand_gazebo.xacro" />
+
+  <xacro:macro name="robot_hand"
+    params="
+    prefix 
+    parent
+    hw_interface
+    *origin"
+  >
+
+    <xacro:robot_hand_transmission prefix="${prefix}" hw_interface="${hw_interface}" />
+    <xacro:robot_hand_gazebo prefix="${prefix}" />
+
+    <!-- connect to parent link -->
+    <joint name="${prefix}robot_hand_base_joint" type="fixed">
+      <parent link="${parent}" />
+      <child link="${prefix}robot_hand_base_link" />
+      <xacro:insert_block name="origin" />
+    </joint>
+
+    <link name="${prefix}robot_hand_base_link">
+      <inertial>
+        <origin xyz="0.00679916179935621 -0.0019256752110938 -0.00365584812497563"
+          rpy="0 0 0" />
+        <mass value="0.027526868485705" />
+        <inertia ixx="4.44813578122786E-06" ixy="-3.90118485536691E-09"
+          ixz="-2.6766706211295E-09" iyy="3.87930983079954E-05"
+          iyz="-4.72320845861549E-07" izz="3.69454967150113E-05" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/base_link.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/base_link.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <link name="${prefix}Index_MCP">
+      <inertial>
+        <origin xyz="0.012682593304865 0.0162068829441154 -0.000625116427471942" rpy="0 0 0" />
+        <mass value="0.00283104222178192" />
+        <inertia ixx="2.68396990747804E-07" ixy="-1.74857407762405E-11"
+          ixz="1.75612867570891E-10" iyy="3.21070306482887E-07" iyz="5.88647002871964E-09"
+          izz="4.25530722400776E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Index_MCP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Index_MCP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}I_MCP" type="revolute">
+      <origin xyz="0.038816 0.0044374 0.008946" rpy="1.5701 0 0" />
+      <parent link="${prefix}robot_hand_base_link" />
+      <child link="${prefix}Index_MCP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.4771" upper="0.18082" effort="10" velocity="1" />
+    </joint>
+    <link name="${prefix}Index_PIP">
+      <inertial>
+        <origin xyz="0.0126310365219343 0.0201709957614433 -9.54113611201825E-05"
+          rpy="0 0 0" />
+        <mass value="0.00349224522527916" />
+        <inertia ixx="4.28270951698702E-07" ixy="1.73003912727725E-11"
+          ixz="-4.91453833301983E-11" iyy="3.82638725849662E-07"
+          iyz="2.80038778736064E-08" izz="5.95574976043894E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Index_PIP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Index_PIP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}I_PIP" type="revolute">
+      <origin xyz="0 0.035 0" rpy="-0.00012255 0 0" />
+      <parent link="${prefix}Index_MCP" />
+      <child link="${prefix}Index_PIP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.5376" upper="0.15464" effort="10" velocity="1" />
+    </joint>
+    <link name="${prefix}Index_DIP">
+      <inertial>
+        <origin xyz="0.0126443172988165 -0.0192320712158117 0.000175621359642236"
+          rpy="0 0 0" />
+        <mass value="0.00362445623964682" />
+        <inertia ixx="3.58966159502274E-07" ixy="4.14596593976165E-11"
+          ixz="2.33824961588716E-11" iyy="3.35705493851876E-07" iyz="6.24081740884986E-10"
+          izz="4.779340977474E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Index_DIP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Index_DIP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}I_DIP" type="revolute">
+      <origin xyz="0 0.041185 0" rpy="3.1389 0 0" />
+      <parent link="${prefix}Index_PIP" />
+      <child link="${prefix}Index_DIP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.4558" upper="0.17453" effort="10" velocity="1" />
+    </joint>
+    <link name="${prefix}Middle_MCP">
+      <inertial>
+        <origin xyz="0.0126879087309877 0.0154979280536171 -0.000460763708118244"
+          rpy="0 0 0" />
+        <mass value="0.00303715863779007" />
+        <inertia ixx="3.00421693606092E-07" ixy="1.28997577863778E-11"
+          ixz="6.95566815197937E-11" iyy="3.42251597986814E-07" iyz="5.91359935850575E-09"
+          izz="4.46095724267292E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Middle_MCP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Middle_MCP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}M_MCP" type="revolute">
+      <origin xyz="0.008435 0.0044374 0.008946" rpy="1.5726 0 0" />
+      <parent link="${prefix}robot_hand_base_link" />
+      <child link="${prefix}Middle_MCP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.4717" upper="0.24435" effort="10" velocity="1" />
+    </joint>
+    <link name="${prefix}Middle_PIP">
+      <inertial>
+        <origin xyz="0.0126177717251578 0.0236370269473342 -0.000123638278977505"
+          rpy="0 0 0" />
+        <mass value="0.00421401220768261" />
+        <inertia ixx="6.44849155259494E-07" ixy="1.09662271183159E-11"
+          ixz="-4.38489725486866E-11" iyy="4.58477964785857E-07"
+          iyz="3.75475104147763E-08" izz="8.2581260157064E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Middle_PIP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Middle_PIP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}M_PIP" type="revolute">
+      <origin xyz="0 0.035 0" rpy="-0.0072617 0 0" />
+      <parent link="${prefix}Middle_MCP" />
+      <child link="${prefix}Middle_PIP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.6343" upper="0.14992" effort="10" velocity="1" />
+    </joint>
+    <link name="${prefix}Middle_DIP">
+      <inertial>
+        <origin xyz="0.0127223421207237 -0.0221676473088204 0.000221550832163056"
+          rpy="0 0 0" />
+        <mass value="0.00436102638650894" />
+        <inertia ixx="5.38273182816303E-07" ixy="1.91216857813148E-11"
+          ixz="-5.93784312446328E-13" iyy="4.04550672036207E-07"
+          iyz="-1.81608330783571E-09" izz="6.70718090874217E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Middle_DIP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Middle_DIP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}M_DIP" type="revolute">
+      <origin xyz="0 0.047185 0" rpy="-3.1352 0 0" />
+      <parent link="${prefix}Middle_PIP" />
+      <child link="${prefix}Middle_DIP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.3116" upper="0.067544" effort="10" velocity="1" />
+    </joint>
+    <link name="${prefix}Ring_MCP">
+      <inertial>
+        <origin xyz="-0.00851069417048304 0.0154979284345673 -0.000460779135479866"
+          rpy="0 0 0" />
+        <mass value="0.00303715829296062" />
+        <inertia ixx="3.00421605529124E-07" ixy="1.29376837811315E-11"
+          ixz="7.00894753767423E-11" iyy="3.42251537696707E-07" iyz="5.91370157650367E-09"
+          izz="4.4609572890628E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Ring_MCP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Ring_MCP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}R_MCP" type="revolute">
+      <origin xyz="0 0.0044374 0.008946" rpy="1.575 0 0" />
+      <parent link="${prefix}robot_hand_base_link" />
+      <child link="${prefix}Ring_MCP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.4696" upper="0.23405" effort="10" velocity="1" />
+    </joint>
+    <link name="${prefix}Ring_PIP">
+      <inertial>
+        <origin xyz="-0.00855133676474402 0.0232472264469809 -0.000176680583923661"
+          rpy="0 0 0" />
+        <mass value="0.00409039102539737" />
+        <inertia ixx="6.16455094868082E-07" ixy="2.67772798437732E-11"
+          ixz="-5.29133703092478E-11" iyy="4.45779709619646E-07"
+          iyz="3.86948158031167E-08" izz="7.97277060473416E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Ring_PIP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Ring_PIP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}R_PIP" type="revolute">
+      <origin xyz="0 0.035 0" rpy="-0.0021277 0 0" />
+      <parent link="${prefix}Ring_MCP" />
+      <child link="${prefix}Ring_PIP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.6357" upper="0.14347" effort="10" velocity="1" />
+    </joint>
+    <link name="${prefix}Ring_DIP">
+      <inertial>
+        <origin xyz="-0.00852393262700487 -0.0203547421063335 0.000239584005666251"
+          rpy="0 0 0" />
+        <mass value="0.00395455991158003" />
+        <inertia ixx="4.19356255680021E-07" ixy="4.85134953386412E-11"
+          ixz="1.59532288599564E-11" iyy="3.62160651949908E-07" iyz="4.24814682139223E-10"
+          izz="5.44900483167488E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Ring_DIP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Ring_DIP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}R_DIP" type="revolute">
+      <origin xyz="0 0.047185 0" rpy="3.1398 0 0" />
+      <parent link="${prefix}Ring_PIP" />
+      <child link="${prefix}Ring_DIP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.3556" upper="0.071733" effort="10" velocity="1" />
+    </joint>
+    <link name="${prefix}Pinky_MCP">
+      <inertial>
+        <origin xyz="-0.012683586125157 0.0155271782044589 -0.000545257290891017"
+          rpy="0 0 0" />
+        <mass value="0.00301955312893102" />
+        <inertia ixx="2.99518703545727E-07" ixy="5.00022852867899E-11"
+          ixz="1.12069400764E-10" iyy="3.41397480166498E-07" iyz="6.05927058795006E-09"
+          izz="4.50216530517462E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Pinky_MCP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Pinky_MCP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}P_MCP" type="revolute">
+      <origin xyz="-0.02453 0.0044374 0.008946" rpy="1.5759 0 0" />
+      <parent link="${prefix}robot_hand_base_link" />
+      <child link="${prefix}Pinky_MCP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.464" upper="0.2618" effort="10" velocity="1" />
+    </joint>
+    <link name="${prefix}Pinky_PIP">
+      <inertial>
+        <origin xyz="-0.0121871427474864 0.0205416921419714 3.56364307361962E-05"
+          rpy="0 0 0" />
+        <mass value="0.0035949457541538" />
+        <inertia ixx="4.50057809440092E-07" ixy="9.49540070653282E-12"
+          ixz="-3.94459518050641E-11" iyy="3.93951645542421E-07"
+          iyz="2.31419842280833E-08" izz="6.20691381270147E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Pinky_PIP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Pinky_PIP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}P_PIP" type="revolute">
+      <origin xyz="0 0.035 0" rpy="-0.0018272 0 0" />
+      <parent link="${prefix}Pinky_MCP" />
+      <child link="${prefix}Pinky_PIP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.5329" upper="0.13107" effort="10" velocity="1" />
+    </joint>
+    <link name="${prefix}Pinky_DIP">
+      <inertial>
+        <origin xyz="-0.0121135317770977 -0.0191486461097885 0.000174607199637055"
+          rpy="0 0 0" />
+        <mass value="0.00364561411043183" />
+        <inertia ixx="3.6398179673314E-07" ixy="4.45358869574254E-11"
+          ixz="2.17009374581359E-11" iyy="3.38510629479639E-07" iyz="6.79893340816322E-10"
+          izz="4.84559404112233E-07" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Pinky_DIP.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robot_hand_description/meshes/Pinky_DIP.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}P_DIP" type="revolute">
+      <origin xyz="0 0.041185 0" rpy="3.1378 0 0" />
+      <parent link="${prefix}Pinky_PIP" />
+      <child link="${prefix}Pinky_DIP" />
+      <axis xyz="1 0 0" />
+      <limit lower="-1.458" upper="0.16947" effort="10" velocity="1" />
+    </joint>
+
+
+  </xacro:macro>
+</robot>

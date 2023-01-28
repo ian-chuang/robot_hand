@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="robot_hand_transmission" params="prefix hw_interface">
+
+    <xacro:macro name="joint_transmission" params="joint_name">
+      <transmission name="${joint_name}_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="${joint_name}">
+          <hardwareInterface>${hw_interface}</hardwareInterface>
+        </joint>
+        <actuator name="${joint_name}_motor">
+          <mechanicalReduction>1</mechanicalReduction>
+          <hardwareInterface>${hw_interface}</hardwareInterface>
+        </actuator>
+      </transmission>
+    </xacro:macro>
+
+    <xacro:joint_transmission joint_name="${prefix}I_MCP" />
+    <xacro:joint_transmission joint_name="${prefix}I_PIP" />
+    <xacro:joint_transmission joint_name="${prefix}I_DIP" />
+    <xacro:joint_transmission joint_name="${prefix}M_MCP" />
+    <xacro:joint_transmission joint_name="${prefix}M_PIP" />
+    <xacro:joint_transmission joint_name="${prefix}M_DIP" />
+    <xacro:joint_transmission joint_name="${prefix}R_MCP" />
+    <xacro:joint_transmission joint_name="${prefix}R_PIP" />
+    <xacro:joint_transmission joint_name="${prefix}R_DIP" />
+    <xacro:joint_transmission joint_name="${prefix}P_MCP" />
+    <xacro:joint_transmission joint_name="${prefix}P_PIP" />
+    <xacro:joint_transmission joint_name="${prefix}P_DIP" />
+
+  </xacro:macro>
+</robot>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+  name="robot_hand">
+  <!-- ur5 -->
+  <xacro:include filename="$(find robot_hand_description)/urdf/robot_hand_macro.xacro" />
+
+  <link name="world" />
+
+  <!-- arm -->
+  <xacro:robot_hand
+    prefix=""
+    parent="world"
+    hw_interface="hardware_interface/PositionJointInterface"
+  >
+    <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0" />
+  </xacro:robot_hand>
+
+  <gazebo>
+    <plugin name="ros_control" filename="libgazebo_ros_control.so"/>
+  </gazebo>
+
+</robot>
