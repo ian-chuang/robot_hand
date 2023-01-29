@@ -29,6 +29,7 @@ hand_controller:
   stop_trajectory_duration: 0.5
   state_publish_rate: *loop_hz
   action_monitor_rate: 10
+  allow_partial_joints_goal: true
 
 gazebo_ros_control:
   pid_gains:

@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: robot_hand_description
+    relative_path: urdf/robot_hand.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/robot_hand.srdf
+  CONFIG:
+    author_name: Ian Chuang
+    author_email: itchuang@ucdavis.edu
+    generated_timestamp: 1674952307

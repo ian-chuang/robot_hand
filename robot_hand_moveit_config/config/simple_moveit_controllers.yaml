@@ -1,0 +1,18 @@
+controller_list:
+  - name: hand_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - I_MCP
+      - I_PIP
+      - I_DIP
+      - M_MCP
+      - M_PIP
+      - M_DIP
+      - P_MCP
+      - P_PIP
+      - P_DIP
+      - R_MCP
+      - R_PIP
+      - R_DIP

@@ -1,0 +1,51 @@
+controller_list:
+  - name: fake_index_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - I_MCP
+      - I_PIP
+      - I_DIP
+  - name: fake_middle_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - M_MCP
+      - M_PIP
+      - M_DIP
+  - name: fake_ring_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - R_MCP
+      - R_PIP
+      - R_DIP
+  - name: fake_pinky_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - P_MCP
+      - P_PIP
+      - P_DIP
+  - name: fake_hand_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - I_MCP
+      - I_PIP
+      - I_DIP
+      - M_MCP
+      - M_PIP
+      - M_DIP
+      - P_MCP
+      - P_PIP
+      - P_DIP
+      - R_MCP
+      - R_PIP
+      - R_DIP
+initial:  # Define initial robot poses per group
+  - group: index
+    pose: open
+  - group: middle
+    pose: open
+  - group: ring
+    pose: open
+  - group: pinky
+    pose: open
+  - group: hand
+    pose: open

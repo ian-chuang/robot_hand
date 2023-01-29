@@ -11,7 +11,7 @@
         <mu2>0.8</mu2>
         <maxVel>0.0</maxVel>
         <minDepth>0.001</minDepth>
-        <!-- <selfCollide>true</selfCollide> -->
+        <selfCollide>true</selfCollide>
       </gazebo>
     </xacro:macro>
 

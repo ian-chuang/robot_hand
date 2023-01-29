@@ -1,0 +1,76 @@
+hand_controller:
+  type: effort_controllers/JointTrajectoryController
+  joints:
+    - I_MCP
+    - I_PIP
+    - I_DIP
+    - M_MCP
+    - M_PIP
+    - M_DIP
+    - P_MCP
+    - P_PIP
+    - P_DIP
+    - R_MCP
+    - R_PIP
+    - R_DIP
+  gains:
+    I_MCP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    I_PIP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    I_DIP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    M_MCP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    M_PIP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    M_DIP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    P_MCP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    P_PIP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    P_DIP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    R_MCP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    R_PIP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    R_DIP:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
